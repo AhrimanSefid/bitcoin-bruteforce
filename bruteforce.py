@@ -68,9 +68,21 @@ def OTBF(r):
       pass
     sint += 1
 
-print('= Bruteforce instances =')
 
-with ProcessPoolExecutor() as executor:
-  executor.map(OTBF, range(cpu_count()))
+# set bruteforce mode
+print('Select bruteforce mode:\n0 - Exit\n1 - RBF\n2 - TBF\n3 - OTBF')
+try:
+  option = int(input('> '))
+except ValueError:
+  option = 0
+
+mode = [None, RBF, TBF, OTBF]
+
+# start bruteforce instances
+if mode[option]:
+  print(f'Starting bruteforce instances in mode: {mode[option].__name__}')
+
+  with ProcessPoolExecutor() as executor:
+    executor.map(mode[option], range(cpu_count()))
 
 print('Stopping...')
