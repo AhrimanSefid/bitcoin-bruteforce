@@ -71,12 +71,14 @@ def OTBF(r):
 
 # set bruteforce mode
 print('Select bruteforce mode:\n0 - Exit\n1 - RBF\n2 - TBF\n3 - OTBF')
-try:
-  option = int(input('> ')) if 0 < int(input('> ')) <= 3 else 0
-except ValueError:
-  option = 0
 
 mode = [None, RBF, TBF, OTBF]
+
+try:
+  choice = int(input('> '))
+  option = choice if 0 < choice <= len(mode) - 1 else 0
+except ValueError:
+  option = 0
 
 # start bruteforce instances
 if mode[option]:
