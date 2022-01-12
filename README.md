@@ -31,6 +31,23 @@ $ sudo nano wallets.txt
 $ python3 bruteforce.py
 ```
 
+**Keep the code running when closing SSH session (Optional):**
+
+To keep your code running you can use screen. Install screen with the following command:
+```bash
+sudo apt update -y screen
+```
+
+After that just start the Python program:
+```bash
+sudo screen python bruteforce.py
+```
+
+If you want to connect to your last session just use:
+```bash
+sudo screen -r
+```
+
 ## Usage
 
 ### Add a wallet
