@@ -42,7 +42,7 @@ def TBF(r):
         print(f'Instance: {r + 1} - Found: {pk.address}')
         with open('found.txt', 'a') as result:
           result.write(f'{pk.to_wif()}\n')
-    except Exception:
+    except ValueError:
       continue
     sint += 1
   print(f'Instance: {r + 1}  - Done after %s' % (time() - start))
@@ -64,7 +64,7 @@ def OTBF(r):
         print(f'Instace: {r + 1} - Found: {pk.address}')
         with open('found.txt', 'a') as result:
           result.write(f'{pk.to_wif()}\n')
-    except Exception:
+    except ValueError:
       continue
     sint += 1
 
