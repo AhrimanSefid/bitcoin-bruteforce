@@ -54,7 +54,7 @@ Will try every INT between 10**75 and max possibility.
 This methode is based on the best practice to get the safest address possible.
 '''
 def OTBF(r):
-  sint = (sep_p * r) + 10**75
+  sint = (sep_p * r) + 10**75 if r == 0 else (sep_p * r)
   mint = (sep_p * (r + 1))
   print(f'Instance: {r + 1} - Generating addresses...')
   while sint < mint:
@@ -70,21 +70,23 @@ def OTBF(r):
 
 
 # set bruteforce mode
-print('Select bruteforce mode:\n0 - Exit\n1 - RBF\n2 - TBF\n3 - OTBF')
-
 mode = [None, RBF, TBF, OTBF]
 
 try:
+  print('Select bruteforce mode:\n0 - Exit\n1 - RBF\n2 - TBF\n3 - OTBF')
   choice = int(input('> '))
+  print(f'How many cores do you want to use ({cpu_count()} available)')
+  cpu_cores = int(input('> '))
+  cpu_cores = cpu_cores if 0 < cpu_cores < cpu_count() else cpu_count()
   option = choice if 0 < choice <= len(mode) - 1 else 0
 except ValueError:
   option = 0
 
 # start bruteforce instances
 if mode[option]:
-  print(f'Starting bruteforce instances in mode: {mode[option].__name__}')
+  print(f'Starting bruteforce instances in mode: {mode[option].__name__} with {cpu_cores} core(s)\n')
 
   with ProcessPoolExecutor() as executor:
-    executor.map(mode[option], range(cpu_count()))
+    executor.map(mode[option], range(cpu_cores))
 
 print('Stopping...')
