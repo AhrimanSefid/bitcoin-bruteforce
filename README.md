@@ -62,7 +62,7 @@ When adding a new wallet to the [wallets.txt](wallets.txt) file. Just insert it 
 ### Start program
 This Python script has multiple functions:
 - OTBF (Optimized traditional bruteforce) <- **This is faster than TBF**
-- TBF  (Traditional bruteforce)
+- TBF  (Traditional bruteforce) <- **Will try every wallet possible**
 - RBF  (Random bruteforce)
 - OBF  (Online bruteforce) <- **Not finished nor started**
 
