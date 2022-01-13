@@ -35,7 +35,7 @@ $ python3 bruteforce.py
 
 To keep your code running you can use screen. Install screen with the following command:
 ```bash
-sudo apt update -y screen
+sudo apt install -y screen
 ```
 
 After that just start the Python program:
