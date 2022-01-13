@@ -62,24 +62,27 @@ When adding a new wallet to the [wallets.txt](wallets.txt) file. Just insert it 
 
 ### Start program
 This Python script has multiple functions:
-- OTBF (Optimized traditional bruteforce) <- **Does not work as intended yet**
+- OTBF (Optimized traditional bruteforce) <- **This is faster than TBF**
 - TBF  (Traditional bruteforce)
 - RBF  (Random bruteforce)
 - OBF  (Online bruteforce) <- **Not finished nor started**
 
 In this example we will run the TBF attack on the wallets inside of the [wallets.txt](wallets.txt):
 ```bash
-1. $ python bruteforce.py                          # start the python program
-2. $ Select bruteforce mode:
-3. $ 0 - Exit
-4. $ 1 - RBF
-5. $ 2 - TBF
-6. $ 3 - OTBF
-7. $ > 1                                           # choose the function to use
-8. $ Starting bruteforce instances in mode: RBF    # feedback that it started bruteforcing
+ 1. $ python bruteforce.py                                         # start the python program
+ 2. $ Select bruteforce mode:
+ 3. $ 0 - Exit
+ 4. $ 1 - RBF
+ 5. $ 2 - TBF
+ 6. $ 3 - OTBF
+ 7. $ > 1                                                          # choose the function to use
+ 8. $ How many cores do you want to use (8 available):
+ 9. $ > 8                                                          # choose how many cores you want to use
+10. $ 
+11. $ Starting bruteforce instances in mode: RBF with 1 core(s)    # feedback that it started bruteforcing
 ```
 
-After line 8 you will see the instances that started, depending on the CPU cores you picked.
+After line 11 you will see the instances that started, depending on the CPU cores you picked.
 
 ### Found a wallet
 When the bruteforce matches an address in the [wallets.txt](wallets.txt) file. It will add or create the found.txt file. The Python program will also print the following:
