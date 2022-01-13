@@ -37,7 +37,7 @@ To keep your code running you can use screen. Install screen with the following 
 sudo apt install -y screen
 ```
 
-After that just start the Python program:
+After that just start the Python program (exit this session by pressing `ctrl` + `a` + `d`):
 ```bash
 sudo screen python bruteforce.py
 ```
