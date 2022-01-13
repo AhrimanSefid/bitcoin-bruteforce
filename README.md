@@ -19,7 +19,7 @@ $ git clone https://github.com/meesvw/bitcoin-bruteforce.git
 $ pip install -r requirements.txt
 ```
 
-4. Add wallets in the wallets.txt file:
+4. Add wallets in the [wallets.txt](wallets.txt) file:
 ```bash
 $ sudo nano wallets.txt
 ```
