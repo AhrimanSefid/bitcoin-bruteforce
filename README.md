@@ -67,7 +67,7 @@ This Python script has multiple functions:
 - OBF  (Online bruteforce) <- **Not finished nor started**
 
 In this example we will run the TBF attack on the wallets inside of the [wallets.txt](wallets.txt):
-```bash
+```
  1. $ python bruteforce.py                                         # start the python program
  2. $ Select bruteforce mode:
  3. $ 0 - Exit
