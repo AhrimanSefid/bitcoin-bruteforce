@@ -66,7 +66,7 @@ This Python script has multiple functions:
 - RBF  (Random bruteforce)
 - OBF  (Online bruteforce) <- **Not finished nor started**
 
-In this example we will run the TBF attack on the wallets inside of the [wallets.txt](wallets.txt):
+In this example we will run the TBF attack on the wallets inside of the [wallets.txt](wallets.txt) file:
 ```
  1. $ python bruteforce.py                                         # start the python program
  2. $ Select bruteforce mode:
