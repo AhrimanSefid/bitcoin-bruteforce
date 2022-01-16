@@ -15,7 +15,6 @@ sep_p = round(max_p / cpu_count())
 Will randomly generate addresses
 '''
 def RBF(r):
-  start = time()
   print(f'Instance: {r + 1} - Generating random addresses...')
   while True:
     pk = Key()
@@ -23,7 +22,6 @@ def RBF(r):
       print(f'Instance: {r + 1} - Found: {pk.address}')
       with open('found.txt', 'a') as result:
         result.write(f'{pk.to_wif()}')
-  print(f'Instace: {r + 1} - done after %s' % (time() - start))
 
 
 # traditional bruteforce (slowest)
