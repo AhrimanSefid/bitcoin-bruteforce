@@ -17,7 +17,7 @@ Will randomly generate addresses
 def RBF(r):
   start = time()
   print(f'Instance: {r + 1} - Generating random addresses...')
-  for _ in range(1000000):
+  while True:
     pk = Key()
     if pk.address in wallets:
       print(f'Instance: {r + 1} - Found: {pk.address}')
