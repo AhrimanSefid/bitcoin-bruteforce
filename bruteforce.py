@@ -21,7 +21,7 @@ def RBF(r):
     if pk.address in wallets:
       print(f'Instance: {r + 1} - Found: {pk.address}')
       with open('found.txt', 'a') as result:
-        result.write(f'{pk.to_wif()}')
+        result.write(f'{pk.to_wif()}\n')
 
 
 # traditional bruteforce (slowest)
