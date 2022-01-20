@@ -78,7 +78,7 @@ In this example we will run the TBF attack on the wallets inside of the [wallets
  8. $ How many cores do you want to use (8 available):
  9. $ > 8                                                          # choose how many cores you want to use
 10. $ 
-11. $ Starting bruteforce instances in mode: RBF with 1 core(s)    # feedback that it started bruteforcing
+11. $ Starting bruteforce instances in mode: RBF with 8 core(s)    # feedback that it started bruteforcing
 ```
 
 After line 11 you will see the instances that started, depending on the CPU cores you picked.
