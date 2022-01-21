@@ -59,7 +59,7 @@ When adding a new wallet to the [wallets.txt](wallets.txt) file. Just insert it 
 ...
 ```
 
-Check if the wallet has balance using [Blockchain Explorer](https://www.blockchain.com/explorer). You can use more
+Check if the wallet has balance using [Blockchain Explorer](https://www.blockchain.com/explorer). You can use any wallet checker you like.
 
 ### Start program
 This Python script has multiple functions:
