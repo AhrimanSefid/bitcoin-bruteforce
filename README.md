@@ -1,7 +1,14 @@
 # bitcoin-bruteforce [![CodeFactor](https://www.codefactor.io/repository/github/meesvw/bitcoin-bruteforce/badge)](https://www.codefactor.io/repository/github/meesvw/bitcoin-bruteforce)
 Bitcoin public address brute force written in Python
 
+## Functions
+- Divide workload over multiple CPU cores
+- Multiple bruteforce functions
+- Compare multiple wallets to increase cracking speed
+
 ## Setup
+
+**THIS IS FOR EDUCATIONAL PURPOSES ONLY, YOU ARE RESPONSIBLE FOR YOUR ACTIONS**
 
 ### Debian install
 1. Install [Python](https://www.python.org/downloads/)
