@@ -6,7 +6,7 @@ Bitcoin public address brute force written in Python
 - Multiple bruteforce functions
 - Compare multiple wallets to increase cracking speed
 
-### Up coming features
+### Upcoming features
 - Online wallet lookup (OBF)
 - Automatic payout system
 - Progress bar
