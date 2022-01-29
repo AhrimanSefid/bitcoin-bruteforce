@@ -10,6 +10,8 @@ Bitcoin public address brute force written in Python
 - Online wallet lookup (OBF)
 - Automatic payout system
 - Progress bar
+- Save bruteforce progress
+- Create wallet database
 
 ## Setup
 
