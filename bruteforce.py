@@ -7,7 +7,7 @@ with open('wallets.txt', 'r') as file:
     wallets = file.read()
 
 max_p = 115792089237316195423570985008687907852837564279074904382605163141518161494336
-sep_p = 0
+sep_p = round(max_p / cpu_count())
 
 # random bruteforce
 '''
@@ -89,9 +89,6 @@ def main():
 
     if mode[option]:
         print(f'Starting bruteforce instances in mode: {mode[option].__name__} with {cpu_cores} core(s)\n')
-
-        global sep_p
-        sep_p = round(max_p / cpu_cores)
 
         with ProcessPoolExecutor() as executor:
             executor.map(mode[option], range(cpu_cores))
