@@ -1,21 +1,15 @@
 from bit import Key
-from time import time
-from multiprocessing import cpu_count
-from concurrent.futures import ProcessPoolExecutor
+from multiprocessing import cpu_count, Process
 
 with open('wallets.txt', 'r') as file:
     wallets = file.read()
 
 max_p = 115792089237316195423570985008687907852837564279074904382605163141518161494336
-sep_p = round(max_p / cpu_count())
+
 
 # random bruteforce
-'''
-Will randomly generate addresses
-'''
-
-
-def RBF(r):
+# Will randomly generate addresses
+def RBF(r, sep_p):
     print(f'Instance: {r + 1} - Generating random addresses...')
     while True:
         pk = Key()
@@ -26,50 +20,36 @@ def RBF(r):
 
 
 # traditional bruteforce (slowest)
-'''
-Will try every INT from 0 to max possible
-'''
-
-
-def TBF(r):
-    sint = sep_p * r
+# Will try every INT from 0 to max possible
+def TBF(r, sep_p):
+    sint = sep_p * r if sep_p * r != 0 else 1
     mint = sep_p * (r + 1)
-    start = time()
     print(f'Instance: {r + 1} - Generating addresses...')
     while sint < mint:
-        try:
-            pk = Key.from_int(sint)
-            if pk.address in wallets:
-                print(f'Instance: {r + 1} - Found: {pk.address}')
-                with open('found.txt', 'a') as result:
-                    result.write(f'{pk.to_wif()}\n')
-        except ValueError:
-            pass
+        pk = Key.from_int(sint)
+        if pk.address in wallets:
+            print(f'Instance: {r + 1} - Found: {pk.address}')
+            with open('found.txt', 'a') as result:
+                result.write(f'{pk.to_wif()}\n')
         sint += 1
-    print(f'Instance: {r + 1}  - Done after %s' % (time() - start))
+    print(f'Instance: {r + 1}  - Done')
 
 
 # optimized traditional bruteforce
-'''
-Will try every INT between 10**75 and max possibility.
-This methode is based on the best practice to get the safest address possible.
-'''
-
-
-def OTBF(r):
+# Will try every INT between 10**75 and max possibility.
+# This methode is based on the best practice to get the safest address possible.
+def OTBF(r, sep_p):
     sint = (sep_p * r) + 10 ** 75 if r == 0 else (sep_p * r)
     mint = (sep_p * (r + 1))
     print(f'Instance: {r + 1} - Generating addresses...')
     while sint < mint:
-        try:
-            pk = Key.from_int(sint)
-            if pk.address in wallets:
-                print(f'Instance: {r + 1} - Found: {pk.address}')
-                with open('found.txt', 'a') as result:
-                    result.write(f'{pk.to_wif()}\n')
-        except ValueError:
-            pass
+        pk = Key.from_int(sint)
+        if pk.address in wallets:
+            print(f'Instance: {r + 1} - Found: {pk.address}')
+            with open('found.txt', 'a') as result:
+                result.write(f'{pk.to_wif()}\n')
         sint += 1
+    print(f'Instance: {r + 1}  - Done')
 
 
 def main():
@@ -90,8 +70,14 @@ def main():
     if mode[option]:
         print(f'Starting bruteforce instances in mode: {mode[option].__name__} with {cpu_cores} core(s)\n')
 
-        with ProcessPoolExecutor() as executor:
-            executor.map(mode[option], range(cpu_cores))
+        instances = []
+        for i in range(cpu_cores):
+            instance = Process(target=mode[option], args=(i, round(max_p / cpu_cores)))
+            instances.append(instance)
+            instance.start()
+
+        for instance in instances:
+            instance.join()
 
     print('Stopping...')
 
