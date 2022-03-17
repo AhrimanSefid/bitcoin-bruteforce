@@ -7,6 +7,8 @@ Bitcoin public address brute force written in Python
 - Compare multiple wallets to increase cracking speed
 
 ### Upcoming features
+- Cython optimization
+- Print generation output
 - Online wallet lookup (OBF)
 - Automatic payout system
 - Progress bar
