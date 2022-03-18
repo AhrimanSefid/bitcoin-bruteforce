@@ -56,13 +56,25 @@ def main():
     # set bruteforce mode
     mode = [None, RBF, TBF, OTBF]
 
+    # print menu
+    menu_string = 'Select bruteforce mode:\n'
+    for count, function in enumerate(mode):
+        try:
+            menu_string += f'{count} - {function.__name__}\n'
+        except AttributeError:
+            menu_string += f'{count} - Exit\n'
+    print(menu_string)
+
     try:
-        print('Select bruteforce mode:\n0 - Exit\n1 - RBF\n2 - TBF\n3 - OTBF')
         choice = int(input('> '))
-        print(f'How many cores do you want to use ({cpu_count()} available)')
-        cpu_cores = int(input('> '))
-        cpu_cores = cpu_cores if 0 < cpu_cores < cpu_count() else cpu_count()
-        option = choice if 0 < choice <= len(mode) - 1 else 0
+        if choice != 0:
+            print(f'How many cores do you want to use ({cpu_count()} available)')
+            cpu_cores = int(input('> '))
+            cpu_cores = cpu_cores if 0 < cpu_cores < cpu_count() else cpu_count()
+            option = choice if 0 < choice <= len(mode) - 1 else 0
+        else:
+            option = 0
+            cpu_cores = 0
     except ValueError:
         option = 0
         cpu_cores = 0
