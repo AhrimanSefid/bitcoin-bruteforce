@@ -1,5 +1,5 @@
 # bitcoin-bruteforce [![CodeFactor](https://www.codefactor.io/repository/github/meesvw/bitcoin-bruteforce/badge)](https://www.codefactor.io/repository/github/meesvw/bitcoin-bruteforce)
-Bitcoin public address brute force written in Python
+Bitcoin public address brute force written in Python with simplicity in mind
 
 ## Functions
 - Divide workload over multiple CPU cores
