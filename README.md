@@ -1,17 +1,16 @@
 # bitcoin-bruteforce [![CodeFactor](https://www.codefactor.io/repository/github/meesvw/bitcoin-bruteforce/badge)](https://www.codefactor.io/repository/github/meesvw/bitcoin-bruteforce)
-Bitcoin public address brute force written in Python with simplicity in mind
+Bitcoin public address brute force written in Python with simplicity and speed in mind
 
 ## Functions
+- Compare multiple wallets to increase cracking speed
 - Divide workload over multiple CPU cores
 - Multiple bruteforce functions
-- Compare multiple wallets to increase cracking speed
+- Print generation output
 
 ### Upcoming features
 - Cython optimization
-- Print generation output
 - Online wallet lookup (OBF)
 - Automatic payout system
-- Progress bar
 - Save bruteforce progress
 - Create wallet database
 

@@ -19,6 +19,18 @@ def RBF(r, sep_p):
                 result.write(f'{pk.to_wif()}')
 
 
+# random bruteforce output
+def debug_RBF(r, sep_p):
+    print(f'Instance: {r + 1} - Generating random addresses...')
+    while True:
+        pk = Key()
+        print(f'Instance: {r + 1} - Generated: {pk.address}')
+        if pk.address in wallets:
+            print(f'Instance: {r + 1} - Found: {pk.address}')
+            with open('found.txt', 'a') as result:
+                result.write(f'{pk.to_wif()}')
+
+
 # traditional bruteforce (slowest)
 # Will try every INT from 0 to max possible
 def TBF(r, sep_p):
@@ -27,6 +39,22 @@ def TBF(r, sep_p):
     print(f'Instance: {r + 1} - Generating addresses...')
     while sint < mint:
         pk = Key.from_int(sint)
+        if pk.address in wallets:
+            print(f'Instance: {r + 1} - Found: {pk.address}')
+            with open('found.txt', 'a') as result:
+                result.write(f'{pk.to_wif()}\n')
+        sint += 1
+    print(f'Instance: {r + 1}  - Done')
+
+
+# traditional bruteforce output
+def debug_TBF(r, sep_p):
+    sint = sep_p * r if sep_p * r != 0 else 1
+    mint = sep_p * (r + 1)
+    print(f'Instance: {r + 1} - Generating addresses...')
+    while sint < mint:
+        pk = Key.from_int(sint)
+        print(f'Instance: {r + 1} - Generated: {pk.address}')
         if pk.address in wallets:
             print(f'Instance: {r + 1} - Found: {pk.address}')
             with open('found.txt', 'a') as result:
@@ -52,15 +80,34 @@ def OTBF(r, sep_p):
     print(f'Instance: {r + 1}  - Done')
 
 
+# optimized traditional bruteforce ouput
+def debug_OTBF(r, sep_p):
+    sint = (sep_p * r) + 10 ** 75 if r == 0 else (sep_p * r)
+    mint = (sep_p * (r + 1))
+    print(f'Instance: {r + 1} - Generating addresses...')
+    while sint < mint:
+        pk = Key.from_int(sint)
+        print(f'Instance: {r + 1} - Generated: {pk.address}')
+        if pk.address in wallets:
+            print(f'Instance: {r + 1} - Found: {pk.address}')
+            with open('found.txt', 'a') as result:
+                result.write(f'{pk.to_wif()}\n')
+        sint += 1
+    print(f'Instance: {r + 1}  - Done')
+
+
 def main():
     # set bruteforce mode
-    mode = [None, RBF, TBF, OTBF]
+    mode = (None, RBF, TBF, OTBF, debug_RBF, debug_TBF, debug_OTBF)
 
     # print menu
     menu_string = 'Select bruteforce mode:\n'
     for count, function in enumerate(mode):
         try:
-            menu_string += f'{count} - {function.__name__}\n'
+            if 'debug' in function.__name__:
+                menu_string += f'{count} - {function.__name__} (Prints output)\n'
+            else:
+                menu_string += f'{count} - {function.__name__}\n'
         except AttributeError:
             menu_string += f'{count} - Exit\n'
     print(menu_string)
