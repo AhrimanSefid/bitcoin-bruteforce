@@ -1,5 +1,7 @@
 from bit import Key
 from multiprocessing import cpu_count, Process
+from requests import get
+from time import sleep
 
 with open('wallets.txt', 'r') as file:
     wallets = file.read()
@@ -45,6 +47,21 @@ def TBF(r, sep_p):
                 result.write(f'{pk.to_wif()}\n')
         sint += 1
     print(f'Instance: {r + 1}  - Done')
+
+
+# online bruteforce (randomized)
+def OBF():
+    print('Instance: 1 - Generating random addresses...')
+    while True:
+        pk = Key()
+        balance = int(get(f'https://blockchain.info/q/getreceivedbyaddress/{pk.address}/').text)
+        print(f'Instance: 1 - Generated: {pk.address} balance: {balance}')
+        if balance > 0:
+            with open('found.txt', 'a') as result:
+                result.write(f'{pk.to_wif()}')
+            print(f'Instance: 1 - Added address to found.txt')
+        print('Sleeping for 30 seconds...')
+        sleep(30)
 
 
 # traditional bruteforce output
@@ -98,7 +115,7 @@ def debug_OTBF(r, sep_p):
 
 def main():
     # set bruteforce mode
-    mode = (None, RBF, TBF, OTBF, debug_RBF, debug_TBF, debug_OTBF)
+    mode = (None, RBF, TBF, OTBF, OBF, debug_RBF, debug_TBF, debug_OTBF)
 
     # print menu
     menu_string = 'Select bruteforce mode:\n'
@@ -114,7 +131,10 @@ def main():
 
     try:
         choice = int(input('> '))
-        if choice != 0:
+        if choice == 4:
+            option = 4
+            cpu_cores = 1
+        elif choice != 0:
             print(f'How many cores do you want to use ({cpu_count()} available)')
             cpu_cores = int(input('> '))
             cpu_cores = cpu_cores if 0 < cpu_cores < cpu_count() else cpu_count()
@@ -126,7 +146,7 @@ def main():
         option = 0
         cpu_cores = 0
 
-    if mode[option]:
+    if mode[option] and mode[option].__name__ != 'OBF':
         print(f'Starting bruteforce instances in mode: {mode[option].__name__} with {cpu_cores} core(s)\n')
 
         instances = []
@@ -137,6 +157,10 @@ def main():
 
         for instance in instances:
             instance.join()
+
+    elif mode[option].__name__ == 'OBF':
+        print(f'Starting bruteforce in mode: {mode[option].__name__} (2 per minute to respect API rate limit)\n')
+        OBF()
 
     print('Stopping...')
 

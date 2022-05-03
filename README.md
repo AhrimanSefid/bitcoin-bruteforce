@@ -5,15 +5,16 @@ Bitcoin public address brute force written in Python with simplicity and speed i
 - Compare multiple wallets to increase cracking speed
 - Divide workload over multiple CPU cores
 - Multiple bruteforce functions
+- Online wallet lookup (OBF)
 - Print generation output
 
 ### Upcoming features
 - GPU optimization (NVIDIA only)
 - Cython optimization
-- Online wallet lookup (OBF)
 - Automatic payout system
 - Save bruteforce progress
 - Create wallet database
+- See hash rate
 
 ## Setup
 
@@ -82,7 +83,7 @@ This Python script has multiple functions:
 - OTBF (Optimized traditional bruteforce) <- **This is faster than TBF**
 - TBF  (Traditional bruteforce) <- **Will try every wallet possible**
 - RBF  (Random bruteforce)
-- OBF  (Online bruteforce) <- **Not finished nor started**
+- OBF  (Online bruteforce)
 
 In this example we will run the TBF attack on the wallets inside of the [wallets.txt](wallets.txt) file:
 ```
@@ -92,14 +93,15 @@ In this example we will run the TBF attack on the wallets inside of the [wallets
  4. $ 1 - RBF
  5. $ 2 - TBF
  6. $ 3 - OTBF
- 7. $ > 1                                                          # choose the function to use
- 8. $ How many cores do you want to use (8 available):
- 9. $ > 8                                                          # choose how many cores you want to use
-10. $ 
-11. $ Starting bruteforce instances in mode: RBF with 8 core(s)    # feedback that it started bruteforcing
+ 7. $ 4 - OBF
+ 8. $ > 1                                                          # choose the function to use
+ 9. $ How many cores do you want to use (8 available):
+10. $ > 8                                                          # choose how many cores you want to use
+11. $ 
+12. $ Starting bruteforce instances in mode: RBF with 8 core(s)    # feedback that it started bruteforcing
 ```
 
-After line 11 you will see the instances that started, depending on the CPU cores you picked.
+After line 12 you will see the instances that started, depending on the CPU cores you picked.
 
 ### Found a wallet
 When the bruteforce matches an address in the [wallets.txt](wallets.txt) file. It will add or create the found.txt file. The Python program will also print the following:
@@ -109,3 +111,4 @@ $ Instance: 1 - Found: 1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ
 
 ## Donations
 > NANO: nano_3hsbm1yhsio64gs9u8gi4hqhapydmmn9n6m8g6ijktfukjkp5bisjxm8wh6r
+``
