@@ -55,19 +55,18 @@ def OBF():
     while True:
         pk = Key()
         try:
-            received = int(get(f'https://blockchain.info/q/getreceivedbyaddress/{pk.address}/').text)
+            balance = int(get(f'https://blockchain.info/q/addressbalance/{pk.address}/').text)
         except ValueError:
-            print(f'Instance: 1 - ValueError addresss: {pk.address} wif: {pk.to_wif()}')
-            print(get(f'https://blockchain.info/q/getreceivedbyaddress/{pk.address}/').text)
+            print(f'Instance: 1 - ValueError address: {pk.address} wif: {pk.to_wif()}')
             continue
 
-        print(f'Instance: 1 - Generated: {pk.address} received: {received}')
-        if received > 0:
+        print(f'Instance: 1 - Generated: {pk.address} balance: {balance}')
+        if balance > 0:
             with open('found.txt', 'a') as result:
                 result.write(f'{pk.to_wif()}')
             print(f'Instance: 1 - Added address to found.txt')
-        print('Sleeping for 30 seconds...')
-        sleep(30)
+        print('Sleeping for 10 seconds...')
+        sleep(10)
 
 
 # traditional bruteforce output
@@ -165,7 +164,7 @@ def main():
             instance.join()
 
     elif mode[option].__name__ == 'OBF':
-        print(f'Starting bruteforce in mode: {mode[option].__name__} (2 per minute to respect API rate limit)\n')
+        print(f'Starting bruteforce in mode: {mode[option].__name__} (6 per minute to respect API rate limit)\n')
         OBF()
 
     print('Stopping...')
