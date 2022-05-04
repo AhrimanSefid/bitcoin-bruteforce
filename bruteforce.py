@@ -54,7 +54,13 @@ def OBF():
     print('Instance: 1 - Generating random addresses...')
     while True:
         pk = Key()
-        balance = int(get(f'https://blockchain.info/q/getreceivedbyaddress/{pk.address}/').text)
+        try:
+            balance = int(get(f'https://blockchain.info/q/getreceivedbyaddress/{pk.address}/').text)
+        except ValueError:
+            print(f'Instance: 1 - ValueError addresss: {pk.address} wif: {pk.to_wif()}')
+            print(get(f'https://blockchain.info/q/getreceivedbyaddress/{pk.address}/').text)
+            continue
+
         print(f'Instance: 1 - Generated: {pk.address} balance: {balance}')
         if balance > 0:
             with open('found.txt', 'a') as result:
