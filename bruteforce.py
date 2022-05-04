@@ -55,14 +55,14 @@ def OBF():
     while True:
         pk = Key()
         try:
-            balance = int(get(f'https://blockchain.info/q/getreceivedbyaddress/{pk.address}/').text)
+            received = int(get(f'https://blockchain.info/q/getreceivedbyaddress/{pk.address}/').text)
         except ValueError:
             print(f'Instance: 1 - ValueError addresss: {pk.address} wif: {pk.to_wif()}')
             print(get(f'https://blockchain.info/q/getreceivedbyaddress/{pk.address}/').text)
             continue
 
-        print(f'Instance: 1 - Generated: {pk.address} balance: {balance}')
-        if balance > 0:
+        print(f'Instance: 1 - Generated: {pk.address} received: {received}')
+        if received > 0:
             with open('found.txt', 'a') as result:
                 result.write(f'{pk.to_wif()}')
             print(f'Instance: 1 - Added address to found.txt')
