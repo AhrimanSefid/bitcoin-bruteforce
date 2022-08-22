@@ -9,8 +9,9 @@ Bitcoin public address brute force written in Python
 
 ```bash
 $ sudo apt update -y && sudo apt upgrade -y
-$ sudo apt install git -y
+$ sudo apt install git pip -y
 $ git clone https://github.com/meesvw/bitcoin-bruteforce.git
+$ pip install bit
 ```
 
 3. Go into the bitcoin-bruteforce folder and install the requirements:
