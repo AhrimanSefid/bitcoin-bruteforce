@@ -10,27 +10,15 @@ max_p = 115792089237316195423570985008687907852837564279074904382605163141518161
 
 
 # random bruteforce
-# Will randomly generate addresses
-def RBF(r, sep_p):
-    print(f'Instance: {r + 1} - Generating random addresses...')
-    while True:
-        pk = Key()
-        if pk.address in wallets:
-            print(f'Instance: {r + 1} - Found: {pk.address}')
-            with open('found.txt', 'a') as result:
-                result.write(f'{pk.to_wif()}')
-
-
-# random bruteforce output
-def debug_RBF(r, sep_p):
-    print(f'Instance: {r + 1} - Generating random addresses...')
-    while True:
-        pk = Key()
-        print(f'Instance: {r + 1} - Generated: {pk.address}')
-        if pk.address in wallets:
-            print(f'Instance: {r + 1} - Found: {pk.address}')
-            with open('found.txt', 'a') as result:
-                result.write(f'{pk.to_wif()}')
+def RBF(r):
+  start = time()
+  print(f'Instance: {r + 1} - Generating random addresses...')
+  while True:
+    pk = Key()
+    if pk.address in wallets:
+      print(f'Instance: {r + 1} - Found: {pk.address}')
+      with open('found.txt', 'a') as result:
+        result.write(f'{pk.to_wif()}')
 
 
 # traditional bruteforce (slowest)
